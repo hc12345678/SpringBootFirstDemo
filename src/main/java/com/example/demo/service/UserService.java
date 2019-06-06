@@ -14,4 +14,8 @@ public interface UserService {
 	
 	HttpResp add(User u);
 	
+	User getUserById(String id);
+
+	void saveUser(User user);
+	
 }

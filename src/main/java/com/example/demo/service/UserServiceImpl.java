@@ -42,4 +42,16 @@ public class UserServiceImpl implements UserService {
 		return hrp;
 	}
 
+	@Override
+	public User getUserById(String id) {
+		// TODO Auto-generated method stub
+		return userDao.getUserById(id);
+	}
+
+	@Override
+	public void saveUser(User user) {
+		// TODO Auto-generated method stub
+		userDao.saveUser(user);
+	}
+
 }

@@ -6,8 +6,6 @@ import lombok.Data;
 public class HttpResp {
 	
 	
-	
-	
 	private String code;  // 状态码 100200错误   100300正确
 	
 	
@@ -15,9 +13,6 @@ public class HttpResp {
 	
 	
 	private Object content;  // 内容
-	
-	
-	
 	
 
 }
