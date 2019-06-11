@@ -3,14 +3,7 @@ package com.example.demo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
@@ -20,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("user")
 @Slf4j
+@CrossOrigin
 public class UserController {
 	
 	
@@ -46,6 +40,15 @@ public class UserController {
 		
 		return "/user/userList";
 	}
+
+	@GetMapping("/getUserById/{id}")
+	@ResponseBody
+	public Object getUserById(@PathVariable("id") String id) {
+
+
+
+		return userService.getUserById(id);
+	}
 	
 	
 	@GetMapping("/userUpdatePage/{id}")
@@ -67,6 +70,18 @@ public class UserController {
 		model.addAttribute("userList", userService.search());
 		
 		return "/user/userList";
+	}
+
+
+	@PostMapping("/saveUser2")
+	@ResponseBody
+	public Object saveUser(@RequestBody User user) {
+		log.info(user.toString());
+		userService.saveUser(user);
+
+
+
+		return "success";
 	}
 	
 	

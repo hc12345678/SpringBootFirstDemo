@@ -9,6 +9,9 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.example.demo.model.User;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 
 @Mapper
 public interface UserDao {
@@ -18,14 +21,17 @@ public interface UserDao {
 	
 	@Select("select * from user")
 	List<User> search();
-	
-	
+
+	@CachePut(value="users")
 	@Insert("insert into user values(#{id},#{userName},#{password})")
 	int add(User u);
 
+
+	@Cacheable(value="users",key = "#id")
 	@Select("select * from user where id=#{id}")
 	User getUserById(@Param("id") String id);
 
+	@CacheEvict(value = "users",key="#p0.id")
 	@Update("update user set userName = #{userName} , password=#{password} where"
 			+ " id=#{id}")
 	void saveUser(User user);
