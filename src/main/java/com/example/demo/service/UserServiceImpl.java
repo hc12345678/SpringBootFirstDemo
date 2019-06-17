@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.util.List;
 import java.util.UUID;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -13,6 +14,7 @@ import com.example.demo.dao.UserDao;
 import com.example.demo.model.User;
 
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService {
 	
 	@Autowired
@@ -26,9 +28,10 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public HttpResp add(User u) {
-		u.setId(UUID.randomUUID().toString().replace("-", ""));
+//		u.setId(UUID.randomUUID().toString().replace("-", ""));
 		int num = userDao.add(u);
-		
+
+
 		HttpResp hrp = new HttpResp();
 		
 		if(num==1) {
@@ -54,6 +57,11 @@ public class UserServiceImpl implements UserService {
 	public void saveUser(User user) {
 		// TODO Auto-generated method stub
 		userDao.saveUser(user);
+	}
+
+	@Override
+	public User login(User u) {
+		return userDao.login(u);
 	}
 
 }

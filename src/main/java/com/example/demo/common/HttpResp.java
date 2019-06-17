@@ -15,6 +15,24 @@ public class HttpResp implements Serializable {
 	
 	
 	private Object content;  // 内容
+
+
+	public static HttpResp success(Object content){
+		HttpResp rp=new HttpResp();
+		rp.setCode("10300");
+		rp.setMsg("ok");
+		rp.setContent(content);
+		return rp;
+	}
+
+	public static HttpResp fail(){
+		HttpResp rp=new HttpResp();
+		rp.setCode("10200");
+		rp.setMsg("fail");
+		rp.setContent(null);
+		return rp;
+	}
+
 	
 
 }

@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +27,8 @@ public class UserController {
 	public Object search() {
 		return userService.search();
 	}
-	
+
+	@RequiresRoles("admin")
 	@PostMapping("/add")
 	@ResponseBody
 	public Object add(@RequestBody User u) {
@@ -78,11 +81,11 @@ public class UserController {
 	public Object saveUser(@RequestBody User user) {
 		log.info(user.toString());
 		userService.saveUser(user);
-
-
-
 		return "success";
 	}
+
+
+
 	
 	
 }

@@ -23,7 +23,7 @@ public interface UserDao {
 	List<User> search();
 
 	@CachePut(value="users")
-	@Insert("insert into user values(#{id},#{userName},#{password})")
+	@Insert("insert into user values(#{id},#{userName},#{password},#{roleId})")
 	int add(User u);
 
 
@@ -35,8 +35,11 @@ public interface UserDao {
 	@Update("update user set userName = #{userName} , password=#{password} where"
 			+ " id=#{id}")
 	void saveUser(User user);
-	
-	
-	
-	
+
+	@Select("select * from user where userName=#{username}")
+	User getUserByUsername(String username);
+
+	@Select("select * from user where userName=#{userName} and " +
+			"password=#{password}")
+    User login(User u);
 }

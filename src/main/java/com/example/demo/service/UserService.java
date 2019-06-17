@@ -17,5 +17,7 @@ public interface UserService {
 	User getUserById(String id);
 
 	void saveUser(User user);
+
+	User login(User u);
 	
 }
