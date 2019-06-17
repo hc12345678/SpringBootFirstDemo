@@ -3,6 +3,9 @@ package com.example.demo.service;
 import java.util.List;
 import java.util.UUID;
 
+import com.example.demo.common.page.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachePut;
@@ -23,7 +26,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> search() {
 		// TODO Auto-generated method stub
-		return userDao.search();
+		return userDao.search(null);
 	}
 
 	@Override
@@ -62,6 +65,17 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User login(User u) {
 		return userDao.login(u);
+	}
+
+	@Override
+	public PageInfo<User> getUserByPage(Page page,User u) {
+
+		PageHelper.startPage(page.getPageNum(), page.getPageSize());
+		List<User> users=userDao.search(u);
+		PageInfo<User> pageInfo = new PageInfo<User>(users);
+
+
+		return pageInfo;
 	}
 
 }

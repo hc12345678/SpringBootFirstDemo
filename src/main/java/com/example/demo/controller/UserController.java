@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import com.example.demo.common.HttpResp;
+import com.example.demo.common.page.Page;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,7 +86,15 @@ public class UserController {
 		return "success";
 	}
 
+	@PostMapping("/getUserByPage")
+	@ResponseBody
+	public Object getUserByPage(@RequestBody Page<User> page) {
 
+		log.info(page.getT().getUserName());
+
+
+		return HttpResp.success(userService.getUserByPage(page,page.getT()));
+	}
 
 	
 	

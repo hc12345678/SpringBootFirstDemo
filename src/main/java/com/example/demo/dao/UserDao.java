@@ -19,8 +19,8 @@ public interface UserDao {
 	
 	
 	
-	@Select("select * from user")
-	List<User> search();
+//	@Select("select * from user")
+	List<User> search(User u);
 
 	@CachePut(value="users")
 	@Insert("insert into user values(#{id},#{userName},#{password},#{roleId})")
@@ -42,4 +42,8 @@ public interface UserDao {
 	@Select("select * from user where userName=#{userName} and " +
 			"password=#{password}")
     User login(User u);
+
+//	@Select("select * from user")
+//    List<User> getUserByPage();
+
 }
