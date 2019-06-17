@@ -12,7 +12,7 @@ import java.util.Date;
 public class JwtUtil {
 
 
-    private static final long expire_time = 60 * 1000;
+    private static final long expire_time = 24*60*60 * 1000;
 
     // 校验方法
     public static boolean verify(String token, String username, String secret) {
